@@ -15,19 +15,19 @@ public class DicewareGenerator implements PassphraseGenerator {
   private final Random rng;
   private final List<String> words;
 
-@Autowired
-  public DicewareGenerator(Random rng, WordProvider provider){
+  @Autowired
+  public DicewareGenerator(Random rng, WordProvider provider) {
     this.rng = rng;
-    words =  new ArrayList<>((provider.getWords()));
+    words = new ArrayList<>((provider.getWords()));
   }
 
   @Override
   public String[] generate(int length) {
- return IntStream
-     .generate(()-> rng.nextInt(words.size()))
-     .limit(length)
-     .mapToObj((position)-> words.get(position))
-     .toArray((size) -> new String[size]);
+    return IntStream
+        .generate(() -> rng.nextInt(words.size()))
+        .limit(length)
+        .mapToObj((position) -> words.get(position))
+        .toArray((size) -> new String[size]);
 
   }
 }
